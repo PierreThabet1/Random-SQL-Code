@@ -1,0 +1,115 @@
+create database my_disc;
+
+create table SALE (
+
+SaleID int primary key,
+
+SaleDate date not null,
+
+Tax float not null,
+
+Total float not null );
+
+ 
+
+create table ITEM (
+
+ItemID int primary key,
+
+Name varchar(10) not null,
+
+Cost float not null,
+
+Price float not null );
+
+ 
+
+create table SALE_ITEM (
+
+SaleID int not null,
+
+SaleItemID int not null,
+
+primary key (SaleID, SaleItemID),
+
+foreign key (SaleID) references SALE(SaleID),
+
+foreign key (SaleItemID) references ITEM(ItemID) );
+
+
+insert into item values (1, 'Milk', 0.50, 1);
+
+insert into item values (2, 'Chips', 1, 2);
+
+insert into item values (3, 'Wine', 7.50, 15);
+
+insert into item values (4, 'Bread', 0.50, 1);
+
+insert into item values (5, 'Orange', 1.50, 3);
+
+insert into item values (6, 'Pepsi', 0.20, 0.40);
+
+ 
+
+insert into sale values (10, '2022-05-05', 0.25, 1);
+
+insert into sale values (20, '2022-01-01', 0.50, 2);
+
+insert into sale values (30, '2021-12-12', 3.75, 15);
+
+insert into sale values (40, '2020-10-10', 0.25, 1);
+
+insert into sale values (50, '2021-11-11', 0.75, 3);
+
+insert into sale values (60, '2020-03-03', 0.10, 0.40);
+
+ 
+
+insert into sale_item values (
+
+(select SaleID from sale where SaleID = 10),
+
+(select ItemID from item where ItemID = 1));
+
+ 
+
+insert into sale_item values (
+
+(select SaleID from sale where SaleID = 20),
+
+(select ItemID from item where ItemID = 1));
+
+ 
+
+insert into sale_item values (
+
+(select SaleID from sale where SaleID = 30),
+
+(select ItemID from item where ItemID = 2));
+
+ 
+
+insert into sale_item values (
+
+(select SaleID from sale where SaleID = 40),
+
+(select ItemID from item where ItemID = 3));
+
+ 
+
+insert into sale_item values (
+
+(select SaleID from sale where SaleID = 50),
+
+(select ItemID from item where ItemID = 4));
+
+ 
+
+insert into sale_item values (
+
+(select SaleID from sale where SaleID = 60),
+
+(select ItemID from item where ItemID = 5));
+
+
+update item set Price = 5 where ItemID = 4;
