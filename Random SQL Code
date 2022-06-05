@@ -1,0 +1,72 @@
+create table Student(
+Student_ID char(4) not null primary key,
+Student_Name varchar(10) not null,
+Dept_Name varchar(30) not null);
+
+create table Student_Courses(
+Course_ID varchar(10) not null,
+Student_ID char(4) not null,
+Section integer not null,
+Year integer not null,
+Grade char(1) not null,
+primary key(Course_ID, Student_ID),
+foreign key(Student_ID) references Student(Student_ID) on update cascade);
+
+
+insert into student values('0000', 'AAAAA', 'Computer Science');
+insert into student values('1111', 'BBBBB', 'Computer Science');
+insert into student values('2222', 'CCCCC', 'Business Administration');
+insert into student values('3333', 'DDDDD', 'Education');
+insert into student values('4444', 'EEEEE', 'Physics');
+insert into student values('5555', 'FFFFF', 'History');
+
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('0000', 'CS 2203', 2, 2020, 'A');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('0000', 'CS 1101', 1, 2019, 'A');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('1111', 'CS 1101', 5, 2019, 'B');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('1111', 'CS 1102', 1, 2019, 'B');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('1111', 'CS 2204', 1, 2020, 'A');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('1111', 'CS 2401', 1, 2020, 'A');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('2222', 'BUS 1101', 3, 2019, 'C');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('2222', 'BUS 2201', 1, 2020, 'B');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('2222', 'BUS 3302', 1, 2020, 'B');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('3333', 'EDUC 5010', 1, 2019, 'A');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('3333', 'EDUC 5210', 1, 2020, 'B');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('4444', 'PHY 1101', 4, 2019, 'A');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('4444', 'PHY 2202', 1, 2020, 'C');
+insert into student_courses(Student_ID, Course_ID, Section, Year, Grade) values('4444', 'PHY 3304', 1, 2020, 'A');
+
+
+select Student_ID from student
+
+union
+
+select Student_ID from student_courses;
+
+
+select * from student inner join student_courses
+
+where student.Student_ID = '1111' and student_courses.Student_ID = '1111';
+
+
+select * from student left outer join student_courses
+
+on student.Dept_Name = 'Computer Science';
+
+
+select * from student right outer join student_courses
+
+on student_courses.Course_ID = 'CS 1101';
+
+
+select * from student left outer join student_courses
+
+on student.Student_ID = student_courses.Student_ID
+
+union
+
+select * from student right outer join student_courses
+
+on student.Student_ID = student_courses.Student_ID;
+
+
+
