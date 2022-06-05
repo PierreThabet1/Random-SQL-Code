@@ -70,3 +70,51 @@ on student.Student_ID = student_courses.Student_ID;
 
 
 
+
+
+create view Computer_Science (Dept_Name, Course_ID, Year)
+
+as select distinct S.Dept_Name, C.Course_ID, C.Year
+
+from student S, student_courses C
+
+where S.Dept_Name = 'Computer Science'
+
+and (C.Course_ID = 'CS 2203'
+
+or C.Course_ID = 'CS 1101'
+
+or C.Course_ID = 'CS 1102'
+
+or C.Course_ID = 'CS 2204'
+
+or C.Course_ID = 'CS 2401');
+
+
+
+create view Students_President (Student_Name, Course_ID, Grade)
+
+as select distinct S.student_Name, C.course_ID, C.Grade
+
+from student S, student_courses C
+
+where S.Student_ID = C.Student_ID
+
+and C.Grade = 'A' ;
+
+
+
+alter view Students_President (Student_Name, Course_ID, Grade)
+
+as select distinct S.student_Name, C.course_ID, C.Grade
+
+from student S, student_courses C
+
+where S.Student_ID = C.Student_ID
+
+and C.Grade = 'B' ;
+
+
+
+
+Drop view computer_science;
